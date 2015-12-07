@@ -1,5 +1,5 @@
 {
-  "name": "vesninandrey/laravel-shopify",
+  "name": "unquaiz/laravel-shopify",
   "description": "Shopify interaction for Laravel with OAuth",
   "keywords": [
     "shopify",
@@ -14,6 +14,10 @@
     {
       "name": "VesninAndrey",
       "email": "vesninandrey@gmail.com"
+    },
+    {
+      "name": "UnQuaiz",
+      "email": "unquaiz@gmail.com"
     }
   ],
   "require": {
@@ -23,7 +27,7 @@
   },
   "autoload": {
     "psr-0": {
-      "VesninAndrey\\Shopify": "src/"
+      "UnQuaiz\\Shopify": "src/"
     }
   },
   "minimum-stability": "stable"
