@@ -1,6 +1,6 @@
 <?php
 
-namespace VesninAndrey\Shopify;
+namespace UnQuaiz\Shopify;
 
 use Config;
 use Illuminate\Support\ServiceProvider;
@@ -22,7 +22,7 @@ class ShopifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package( 'vesninandrey/laravel-shopify' );
+        $this->package( 'unquaiz/laravel-shopify' );
     }
 
     /**
@@ -34,7 +34,7 @@ class ShopifyServiceProvider extends ServiceProvider
     {
         $this->app->booting( function () {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias( 'Shopify', 'VesninAndrey\Shopify\Facades\Shopify' );
+            $loader->alias( 'Shopify', 'UnQuaiz\Shopify\Facades\Shopify' );
         } );
 
         $this->app['shopify'] = $this->app->share( function ( $app ) {

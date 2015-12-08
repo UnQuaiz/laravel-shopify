@@ -1,6 +1,6 @@
 <?php
 
-namespace VesninAndrey\Shopify;
+namespace UnQuaiz\Shopify;
 
 use Exception;
 use GuzzleHttp\Client;
