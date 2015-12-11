@@ -373,6 +373,18 @@ class Shopify
     }
 
     /**
+     * Retrieve a count of all the orders
+     *
+     * @param $data
+     *
+     * @return array
+     */
+    public function getOrdersCount( $data = [ ] )
+    {
+        return $this->makeRequest( 'GET', 'orders/count.json', $data );
+    }
+
+    /**
      * Receives a single order
      *
      * @param int $id
