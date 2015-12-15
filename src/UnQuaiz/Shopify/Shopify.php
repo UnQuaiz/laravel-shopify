@@ -143,6 +143,25 @@ class Shopify
         return static::_verifyRequest( $match, $input, $this->apisecret );
     }
 
+    public static function _verifyWebhook($data, $hmac_header, $apisecret)
+    {
+        $calculated_hmac = base64_encode(hash_hmac('sha256', $data, $apisecret, true));
+        return ($hmac_header == $calculated_hmac);
+    }
+
+    public function verifyWebhook($data = null, $hmac_header = null)
+    {
+        if ($data === null) {
+            $data = file_get_contents('php://input');
+        }
+
+        if ($hmac_header === null) {
+            $hmac_header = $_SERVER['HTTP_X_SHOPIFY_HMAC_SHA256'];
+        }
+
+        return static::_verifyWebhook($data, $hmac_header, $this->apisecret);
+    }
+
     /**
      * Calls API and returns OAuth Access Token, which will be needed for all future requests
      * @param string $code
