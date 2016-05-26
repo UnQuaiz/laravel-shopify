@@ -190,6 +190,10 @@ class Shopify
      */
     private function makeRequest( $method, $page, $data = [ ] )
     {
+        if ($method == 'GET') {
+            return $this->client->send($this->client->createRequest($method, $page, ['query' => $data]))->json();
+        }
+        
         return $this->client->send( $this->client->createRequest( $method, $page, [ 'json' => $data ] ) )->json();
     }
 
