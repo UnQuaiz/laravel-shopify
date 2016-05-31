@@ -190,6 +190,10 @@ class Shopify
      */
     private function makeRequest( $method, $page, $data = [ ] )
     {
+        if ($method == 'GET') {
+            return $this->client->send($this->client->createRequest($method, $page, ['query' => $data]))->json();
+        }
+        
         return $this->client->send( $this->client->createRequest( $method, $page, [ 'json' => $data ] ) )->json();
     }
 
@@ -426,4 +430,39 @@ class Shopify
         return $this->makeRequest('POST', 'products/' . $productId . '/images.json', $d);
     }
 
+    
+    /**
+     * returns all variants of all products
+     *
+     * @return array
+     */
+    public function getVariants( $data )
+    {
+        return $this->makeRequest( 'GET', 'variants.json', $data );
+    }
+
+    /**
+     * returns a count of all variants of all products
+     *
+     * @return int
+     */
+    public function getVariantsCount()
+    {
+        $all_count = 0;
+        $page = 1;
+        do {
+            $variants = $this->getVariants([
+                'fields' => 'id', // 'id,product_id,title,option1,option2,option3',
+                'limit' => 250,
+                'page' => $page,
+            ]);
+            $variants = $variants['variants'];
+
+            $count = count($variants);
+            $all_count += $count;
+            $page++;
+        } while ($count > 0);
+
+        return $all_count;
+    }
 }
